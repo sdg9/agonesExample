@@ -20,7 +20,7 @@ namespace AgonesExample.Editor
 {
     public class BatchBuild
     {
-        [MenuItem("Build Tool/Build Server")]
+        [MenuItem("Build Tool/Build Linux Server")]
         public static void BuildServer()
         {
             string[] scenes = new[] { "Assets/Scenes/AgonesUnitySimple.unity" };
@@ -33,6 +33,24 @@ namespace AgonesExample.Editor
                 scenes = scenes,
                 locationPathName = dir + "/UnitySimpleServer.x86_64",
                 target = BuildTarget.StandaloneLinux64,
+                options = BuildOptions.EnableHeadlessMode
+            };
+            BuildPipeline.BuildPlayer(option);
+        }
+
+        [MenuItem("Build Tool/Windows Build Server")]
+        public static void BuildWindowsServer()
+        {
+            string[] scenes = new[] { "Assets/Scenes/AgonesUnitySimple.unity" };
+            string dir = "Builds/WinServer";
+
+            Directory.CreateDirectory(dir);
+
+            BuildPlayerOptions option = new BuildPlayerOptions
+            {
+                scenes = scenes,
+                locationPathName = dir + "/UnitySimpleServer.exe",
+                target = BuildTarget.StandaloneWindows64,
                 options = BuildOptions.EnableHeadlessMode
             };
             BuildPipeline.BuildPlayer(option);
